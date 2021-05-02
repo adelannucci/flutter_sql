@@ -3,13 +3,11 @@ import 'package:http_interceptor/http_interceptor.dart';
 
 import 'interceptors/logging_interceptor.dart';
 
-const baseUrl = '<ip>:8080';
+const baseUrl = '<ip>8080';
 
-final headers = {
-  'Content-type': 'application/json',
-  'password': '1000',
-};
-
-final Client client = HttpClientWithInterceptor.build(interceptors: [
-  LoggingInterceptor(),
-]);
+final Client client = HttpClientWithInterceptor.build(
+  interceptors: [
+    LoggingInterceptor(),
+  ],
+  requestTimeout: Duration(seconds: 5),
+);
