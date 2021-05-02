@@ -1,4 +1,4 @@
-import 'package:bytebank/models/contacts.dart';
+import 'package:bytebank/models/contact.dart';
 
 import '../app_database.dart';
 

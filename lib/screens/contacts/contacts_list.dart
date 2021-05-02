@@ -1,6 +1,6 @@
 import 'package:bytebank/database/dao/contact_dao.dart';
-import 'package:bytebank/models/contacts.dart';
-import 'package:bytebank/screens/contacts/form.dart';
+import 'package:bytebank/models/contact.dart';
+import 'package:bytebank/screens/contacts/contacts_form.dart';
 import 'package:flutter/material.dart';
 
 class ContactsList extends StatefulWidget {
@@ -15,7 +15,7 @@ class _ContactsListState extends State<ContactsList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Contacts'),
+        title: Text('Transfers'),
       ),
       body: FutureBuilder<List<Contact>>(
         initialData: [],
