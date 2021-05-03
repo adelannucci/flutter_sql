@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class Progress extends StatelessWidget {
   final String message;
 
-  Progress({this.message = "Loading..."});
+  Progress({
+    this.message = 'Loading...',
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +13,7 @@ class Progress extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
+        children: <Widget>[
           CircularProgressIndicator(),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
@@ -21,6 +23,20 @@ class Progress extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ProgressView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Processing'),
+      ),
+      body: Progress(
+        message: 'Sending...',
       ),
     );
   }

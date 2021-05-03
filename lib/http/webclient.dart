@@ -3,7 +3,7 @@ import 'package:http_interceptor/http_interceptor.dart';
 
 import 'interceptors/logging_interceptor.dart';
 
-const baseUrl = '<ip>8080';
+const baseUrl = '192.168.15.69:8080';
 
 final Client client = HttpClientWithInterceptor.build(
   interceptors: [

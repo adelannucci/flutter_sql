@@ -5,6 +5,7 @@ import 'package:bytebank/models/transaction.dart';
 import 'package:flutter/material.dart';
 
 class TransactionsList extends StatelessWidget {
+
   final TransactionWebClient _webClient = TransactionWebClient();
 
   @override
@@ -14,7 +15,6 @@ class TransactionsList extends StatelessWidget {
         title: Text('Transactions'),
       ),
       body: FutureBuilder<List<Transaction>>(
-        initialData: [],
         future: _webClient.findAll(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
@@ -26,58 +26,44 @@ class TransactionsList extends StatelessWidget {
             case ConnectionState.active:
               break;
             case ConnectionState.done:
-              if (snapshot.hasData) {
+              if(snapshot.hasData){
                 final List<Transaction> transactions = snapshot.data;
                 if (transactions.isNotEmpty) {
                   return ListView.builder(
                     itemBuilder: (context, index) {
                       final Transaction transaction = transactions[index];
-                      return TransactionItem(transaction: transaction);
+                      return Card(
+                        child: ListTile(
+                          leading: Icon(Icons.monetization_on),
+                          title: Text(
+                            transaction.value.toString(),
+                            style: TextStyle(
+                              fontSize: 24.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          subtitle: Text(
+                            transaction.contact.accountNumber.toString(),
+                            style: TextStyle(
+                              fontSize: 16.0,
+                            ),
+                          ),
+                        ),
+                      );
                     },
                     itemCount: transactions.length,
                   );
                 }
               }
-
               return CenteredMessage(
                 'No transactions found',
                 icon: Icons.warning,
               );
               break;
           }
+
           return CenteredMessage('Unknown error');
         },
-      ),
-    );
-  }
-}
-
-class TransactionItem extends StatelessWidget {
-  const TransactionItem({
-    Key key,
-    @required this.transaction,
-  }) : super(key: key);
-
-  final Transaction transaction;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        leading: Icon(Icons.monetization_on),
-        title: Text(
-          transaction.value.toString(),
-          style: TextStyle(
-            fontSize: 24.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        subtitle: Text(
-          transaction.contact.accountNumber.toString(),
-          style: TextStyle(
-            fontSize: 16.0,
-          ),
-        ),
       ),
     );
   }
